@@ -45,6 +45,8 @@ htmlcov/
 data/processed/
 data/storage/
 *.parquet
+*.db
+*.sqlite3
 
 # OS specific
 Thumbs.db
