@@ -1,0 +1,84 @@
+{
+  "before_stats": {
+    "total_rows": 8807,
+    "total_columns": 14,
+    "total_cells": 123298,
+    "missing_cells": 13117,
+    "missing_percentage": 10.64,
+    "duplicate_rows": 0
+  },
+  "after_stats": {
+    "total_rows": 8807,
+    "total_columns": 14,
+    "total_cells": 123298,
+    "missing_cells": 8823,
+    "missing_percentage": 7.16,
+    "duplicate_rows": 0
+  },
+  "delta": {
+    "rows_removed": 0,
+    "missing_cells_resolved": 4294,
+    "duplicates_removed": 0,
+    "total_operations": 6
+  },
+  "steps": [
+    {
+      "step_number": 1,
+      "operation": "strip_whitespace",
+      "target_column": null,
+      "parameters": {},
+      "rows_affected": 89,
+      "details": "Trimmed leading/trailing whitespaces in 89 cells."
+    },
+    {
+      "step_number": 2,
+      "operation": "date_normalization",
+      "target_column": "date_added",
+      "parameters": {
+        "format": "%Y-%m-%d"
+      },
+      "rows_affected": 8797,
+      "details": "Normalized 8,797 dates in 'date_added' to ISO-8601 (YYYY-MM-DD)."
+    },
+    {
+      "step_number": 3,
+      "operation": "fill_constant",
+      "target_column": "director",
+      "parameters": {
+        "value": "Unknown Director"
+      },
+      "rows_affected": 2634,
+      "details": "Imputed 2,634 missing values in 'director' with constant 'Unknown Director'."
+    },
+    {
+      "step_number": 4,
+      "operation": "fill_constant",
+      "target_column": "country",
+      "parameters": {
+        "value": "Unknown Country"
+      },
+      "rows_affected": 831,
+      "details": "Imputed 831 missing values in 'country' with constant 'Unknown Country'."
+    },
+    {
+      "step_number": 5,
+      "operation": "fill_constant",
+      "target_column": "cast",
+      "parameters": {
+        "value": "Unknown Cast"
+      },
+      "rows_affected": 825,
+      "details": "Imputed 825 missing values in 'cast' with constant 'Unknown Cast'."
+    },
+    {
+      "step_number": 6,
+      "operation": "fill_mode",
+      "target_column": "rating",
+      "parameters": {
+        "computed_mode": "TV-MA"
+      },
+      "rows_affected": 4,
+      "details": "Imputed 4 missing values in 'rating' with mode ('TV-MA')."
+    }
+  ]
+}
