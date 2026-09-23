@@ -1,0 +1,174 @@
+{
+  "total_rows": 8807,
+  "total_columns": 14,
+  "total_issues_count": 14560,
+  "issues_by_category": {
+    "MISSING": 13117,
+    "INCONSISTENT_CATEGORY": 15,
+    "OUTLIER": 1428
+  },
+  "issues_by_severity": {
+    "CRITICAL": 11444,
+    "WARNING": 1673,
+    "INFO": 1443
+  },
+  "issues": [
+    {
+      "category": "MISSING",
+      "severity": "CRITICAL",
+      "column": "director",
+      "description": "Column 'director' has 2,634 missing values (29.91%).",
+      "affected_count": 2634,
+      "affected_percentage": 29.91,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "WARNING",
+      "column": "cast",
+      "description": "Column 'cast' has 825 missing values (9.37%).",
+      "affected_count": 825,
+      "affected_percentage": 9.37,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "WARNING",
+      "column": "country",
+      "description": "Column 'country' has 831 missing values (9.44%).",
+      "affected_count": 831,
+      "affected_percentage": 9.44,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "WARNING",
+      "column": "date_added",
+      "description": "Column 'date_added' has 10 missing values (0.11%).",
+      "affected_count": 10,
+      "affected_percentage": 0.11,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "WARNING",
+      "column": "rating",
+      "description": "Column 'rating' has 4 missing values (0.05%).",
+      "affected_count": 4,
+      "affected_percentage": 0.05,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "WARNING",
+      "column": "duration",
+      "description": "Column 'duration' has 3 missing values (0.03%).",
+      "affected_count": 3,
+      "affected_percentage": 0.03,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "CRITICAL",
+      "column": "duration_minutes",
+      "description": "Column 'duration_minutes' has 2,679 missing values (30.42%).",
+      "affected_count": 2679,
+      "affected_percentage": 30.42,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "MISSING",
+      "severity": "CRITICAL",
+      "column": "duration_seasons",
+      "description": "Column 'duration_seasons' has 6,131 missing values (69.62%).",
+      "affected_count": 6131,
+      "affected_percentage": 69.62,
+      "sample_values": [],
+      "suggested_action": "Impute with default/mode/median or drop if non-critical."
+    },
+    {
+      "category": "INCONSISTENT_CATEGORY",
+      "severity": "INFO",
+      "column": "title",
+      "description": "Column 'title' contains case inconsistencies: {Love in a Puff, Love In A Puff}; {Esperando la carroza, Esperando La Carroza}; {Sin senos s\u00ed hay para\u00edso, Sin Senos s\u00ed Hay Para\u00edso}; {FullMetal Alchemist, Fullmetal Alchemist}; {Death Note, DEATH NOTE}.",
+      "affected_count": 10,
+      "affected_percentage": 0.11,
+      "sample_values": [
+        "{Love in a Puff, Love In A Puff}",
+        "{Esperando la carroza, Esperando La Carroza}",
+        "{Sin senos s\u00ed hay para\u00edso, Sin Senos s\u00ed Hay Para\u00edso}",
+        "{FullMetal Alchemist, Fullmetal Alchemist}",
+        "{Death Note, DEATH NOTE}"
+      ],
+      "suggested_action": "Standardize casing using uppercase, lowercase, or titlecase mapping."
+    },
+    {
+      "category": "INCONSISTENT_CATEGORY",
+      "severity": "INFO",
+      "column": "director",
+      "description": "Column 'director' contains case inconsistencies: {Kevin Macdonald, Kevin MacDonald}; {Fernando Fr\u00edas de la Parra, Fernando Fr\u00edas De La Parra}.",
+      "affected_count": 5,
+      "affected_percentage": 0.06,
+      "sample_values": [
+        "{Kevin Macdonald, Kevin MacDonald}",
+        "{Fernando Fr\u00edas de la Parra, Fernando Fr\u00edas De La Parra}"
+      ],
+      "suggested_action": "Standardize casing using uppercase, lowercase, or titlecase mapping."
+    },
+    {
+      "category": "OUTLIER",
+      "severity": "INFO",
+      "column": "release_year",
+      "description": "Column 'release_year' has 719 statistical outliers (IQR method).",
+      "affected_count": 719,
+      "affected_percentage": 8.16,
+      "sample_values": [
+        1993,
+        1996,
+        1998,
+        1997,
+        1975
+      ],
+      "suggested_action": "Inspect domain context; consider winsorizing or capping if erroneous."
+    },
+    {
+      "category": "OUTLIER",
+      "severity": "INFO",
+      "column": "duration_minutes",
+      "description": "Column 'duration_minutes' has 450 statistical outliers (IQR method).",
+      "affected_count": 450,
+      "affected_percentage": 5.11,
+      "sample_values": [
+        161.0,
+        166.0,
+        23.0,
+        13.0,
+        182.0
+      ],
+      "suggested_action": "Inspect domain context; consider winsorizing or capping if erroneous."
+    },
+    {
+      "category": "OUTLIER",
+      "severity": "INFO",
+      "column": "duration_seasons",
+      "description": "Column 'duration_seasons' has 259 statistical outliers (IQR method).",
+      "affected_count": 259,
+      "affected_percentage": 2.94,
+      "sample_values": [
+        9.0,
+        4.0,
+        5.0,
+        6.0,
+        6.0
+      ],
+      "suggested_action": "Inspect domain context; consider winsorizing or capping if erroneous."
+    }
+  ]
+}
