@@ -1,0 +1,392 @@
+{
+  "summary": {
+    "total_rows": 8807,
+    "total_columns": 14,
+    "total_cells": 123298,
+    "total_missing_cells": 13117,
+    "missing_percentage": 10.64,
+    "duplicate_rows": 0,
+    "duplicate_percentage": 0.0,
+    "memory_bytes": 4188397,
+    "column_types_breakdown": {
+      "text": 11,
+      "numeric": 3
+    }
+  },
+  "columns": {
+    "show_id": {
+      "name": "show_id",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 8807,
+      "unique_percentage": 100.0,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 2,
+        "max_length": 5,
+        "avg_length": 4.87,
+        "top_values": {
+          "s1": 1,
+          "s2": 1,
+          "s3": 1,
+          "s4": 1,
+          "s5": 1
+        }
+      },
+      "datetime_stats": null
+    },
+    "type": {
+      "name": "type",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 2,
+      "unique_percentage": 0.02,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 5,
+        "max_length": 7,
+        "avg_length": 5.61,
+        "top_values": {
+          "Movie": 6131,
+          "TV Show": 2676
+        }
+      },
+      "datetime_stats": null
+    },
+    "title": {
+      "name": "title",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 8807,
+      "unique_percentage": 100.0,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 1,
+        "max_length": 104,
+        "avg_length": 17.73,
+        "top_values": {
+          "Dick Johnson Is Dead": 1,
+          "Blood & Water": 1,
+          "Ganglands": 1,
+          "Jailbirds New Orleans": 1,
+          "Kota Factory": 1
+        }
+      },
+      "datetime_stats": null
+    },
+    "director": {
+      "name": "director",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 2634,
+      "null_percentage": 29.91,
+      "unique_count": 4528,
+      "unique_percentage": 51.41,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 2,
+        "max_length": 208,
+        "avg_length": 15.37,
+        "top_values": {
+          "Rajiv Chilaka": 19,
+          "Ra\u00fal Campos, Jan Suter": 18,
+          "Suhas Kadav": 16,
+          "Marcus Raboy": 16,
+          "Jay Karas": 14
+        }
+      },
+      "datetime_stats": null
+    },
+    "cast": {
+      "name": "cast",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 825,
+      "null_percentage": 9.37,
+      "unique_count": 7692,
+      "unique_percentage": 87.34,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 3,
+        "max_length": 771,
+        "avg_length": 119.75,
+        "top_values": {
+          "David Attenborough": 19,
+          "Vatsal Dubey, Julie Tejwani, Rupa Bhimani, Jigna Bhardwaj, Rajesh Kava, Mousam, Swapnil": 14,
+          "Samuel West": 10,
+          "Jeff Dunham": 7,
+          "David Spade, London Hughes, Fortune Feimster": 6
+        }
+      },
+      "datetime_stats": null
+    },
+    "country": {
+      "name": "country",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 831,
+      "null_percentage": 9.44,
+      "unique_count": 748,
+      "unique_percentage": 8.49,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 4,
+        "max_length": 123,
+        "avg_length": 12.58,
+        "top_values": {
+          "United States": 2818,
+          "India": 972,
+          "United Kingdom": 419,
+          "Japan": 245,
+          "South Korea": 199
+        }
+      },
+      "datetime_stats": null
+    },
+    "date_added": {
+      "name": "date_added",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 10,
+      "null_percentage": 0.11,
+      "unique_count": 1767,
+      "unique_percentage": 20.06,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 11,
+        "max_length": 19,
+        "avg_length": 14.74,
+        "top_values": {
+          "January 1, 2020": 109,
+          "November 1, 2019": 89,
+          "March 1, 2018": 75,
+          "December 31, 2019": 74,
+          "October 1, 2018": 71
+        }
+      },
+      "datetime_stats": null
+    },
+    "release_year": {
+      "name": "release_year",
+      "dtype": "int64",
+      "semantic_type": "numeric",
+      "total_count": 8807,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 74,
+      "unique_percentage": 0.84,
+      "numeric_stats": {
+        "min": 1925.0,
+        "max": 2021.0,
+        "mean": 2014.1802,
+        "median": 2017.0,
+        "std": 8.8193,
+        "q25": 2013.0,
+        "q75": 2019.0
+      },
+      "text_stats": null,
+      "datetime_stats": null
+    },
+    "rating": {
+      "name": "rating",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 4,
+      "null_percentage": 0.05,
+      "unique_count": 17,
+      "unique_percentage": 0.19,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 1,
+        "max_length": 8,
+        "avg_length": 4.43,
+        "top_values": {
+          "TV-MA": 3207,
+          "TV-14": 2160,
+          "TV-PG": 863,
+          "R": 799,
+          "PG-13": 490
+        }
+      },
+      "datetime_stats": null
+    },
+    "duration": {
+      "name": "duration",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 3,
+      "null_percentage": 0.03,
+      "unique_count": 220,
+      "unique_percentage": 2.5,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 5,
+        "max_length": 10,
+        "avg_length": 7.04,
+        "top_values": {
+          "1 Season": 1793,
+          "2 Seasons": 425,
+          "3 Seasons": 199,
+          "90 min": 152,
+          "94 min": 146
+        }
+      },
+      "datetime_stats": null
+    },
+    "listed_in": {
+      "name": "listed_in",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 514,
+      "unique_percentage": 5.84,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 6,
+        "max_length": 79,
+        "avg_length": 33.41,
+        "top_values": {
+          "Dramas, International Movies": 362,
+          "Documentaries": 359,
+          "Stand-Up Comedy": 334,
+          "Comedies, Dramas, International Movies": 274,
+          "Dramas, Independent Movies, International Movies": 252
+        }
+      },
+      "datetime_stats": null
+    },
+    "description": {
+      "name": "description",
+      "dtype": "str",
+      "semantic_type": "text",
+      "total_count": 8807,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 8775,
+      "unique_percentage": 99.64,
+      "numeric_stats": null,
+      "text_stats": {
+        "min_length": 61,
+        "max_length": 248,
+        "avg_length": 143.3,
+        "top_values": {
+          "Paranormal activity at a lush, abandoned property alarms a group eager to redevelop the site, but the eerie events may not be as unearthly as they think.": 4,
+          "Challenged to compose 100 songs before he can marry the girl he loves, a tortured but passionate singer-songwriter embarks on a poignant musical journey.": 3,
+          "Multiple women report their husbands as missing but when it appears they are looking for the same man, a police officer traces their cryptic connection.": 3,
+          "A surly septuagenarian gets another chance at her 20s after having her photo snapped at a studio that magically takes 50 years off her life.": 3,
+          "With their biggest foe seemingly defeated, InuYasha and his friends return to everyday life. But the peace is soon shattered by an emerging new enemy.": 2
+        }
+      },
+      "datetime_stats": null
+    },
+    "duration_minutes": {
+      "name": "duration_minutes",
+      "dtype": "float64",
+      "semantic_type": "numeric",
+      "total_count": 8807,
+      "null_count": 2679,
+      "null_percentage": 30.42,
+      "unique_count": 205,
+      "unique_percentage": 2.33,
+      "numeric_stats": {
+        "min": 3.0,
+        "max": 312.0,
+        "mean": 99.5772,
+        "median": 98.0,
+        "std": 28.2906,
+        "q25": 87.0,
+        "q75": 114.0
+      },
+      "text_stats": null,
+      "datetime_stats": null
+    },
+    "duration_seasons": {
+      "name": "duration_seasons",
+      "dtype": "float64",
+      "semantic_type": "numeric",
+      "total_count": 8807,
+      "null_count": 6131,
+      "null_percentage": 69.62,
+      "unique_count": 15,
+      "unique_percentage": 0.17,
+      "numeric_stats": {
+        "min": 1.0,
+        "max": 17.0,
+        "mean": 1.7649,
+        "median": 1.0,
+        "std": 1.5828,
+        "q25": 1.0,
+        "q75": 2.0
+      },
+      "text_stats": null,
+      "datetime_stats": null
+    }
+  },
+  "missing_rankings": [
+    {
+      "column": "duration_seasons",
+      "null_count": 6131,
+      "null_percentage": 69.62,
+      "semantic_type": "numeric"
+    },
+    {
+      "column": "duration_minutes",
+      "null_count": 2679,
+      "null_percentage": 30.42,
+      "semantic_type": "numeric"
+    },
+    {
+      "column": "director",
+      "null_count": 2634,
+      "null_percentage": 29.91,
+      "semantic_type": "text"
+    },
+    {
+      "column": "country",
+      "null_count": 831,
+      "null_percentage": 9.44,
+      "semantic_type": "text"
+    },
+    {
+      "column": "cast",
+      "null_count": 825,
+      "null_percentage": 9.37,
+      "semantic_type": "text"
+    },
+    {
+      "column": "date_added",
+      "null_count": 10,
+      "null_percentage": 0.11,
+      "semantic_type": "text"
+    },
+    {
+      "column": "rating",
+      "null_count": 4,
+      "null_percentage": 0.05,
+      "semantic_type": "text"
+    },
+    {
+      "column": "duration",
+      "null_count": 3,
+      "null_percentage": 0.03,
+      "semantic_type": "text"
+    }
+  ]
+}
