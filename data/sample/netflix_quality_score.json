@@ -1,0 +1,14 @@
+{
+  "before_score": 96.81,
+  "after_score": 97.85,
+  "score_delta": 1.04,
+  "before_grade": "A",
+  "after_grade": "A",
+  "grade_improved": false,
+  "dimension_deltas": {
+    "completeness": 3.48,
+    "validity": 0.0,
+    "uniqueness": 0.0,
+    "consistency": 0.0
+  }
+}
