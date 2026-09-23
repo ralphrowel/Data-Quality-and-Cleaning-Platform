@@ -1,0 +1,4 @@
+severity_code,severity_name,severity_weight,color_hex
+CRITICAL,Critical,3,#EF4444
+WARNING,Warning,2,#F59E0B
+INFO,Informational,1,#38BDF8

@@ -1,0 +1,6 @@
+grade,grade_name,min_score,max_score,is_trustworthy,color_hex
+A,Grade A (Excellent),90.0,100.0,1,#10B981
+B,Grade B (Good),80.0,89.9,1,#38BDF8
+C,Grade C (Caution),70.0,79.9,0,#F59E0B
+D,Grade D (Poor),60.0,69.9,0,#F97316
+F,Grade F (Untrusted),0.0,59.9,0,#EF4444
