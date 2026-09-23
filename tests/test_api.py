@@ -21,6 +21,25 @@ def test_health_check_endpoint(client):
     assert "version" in data
 
 
+def test_swagger_and_openapi_endpoints(client):
+    """Verify Swagger UI and OpenAPI 3.0 schema endpoints."""
+    # Test OpenAPI 3.0 YAML/JSON Schema endpoint
+    schema_res = client.get("/api/schema/")
+    assert schema_res.status_code == 200
+    assert "openapi" in schema_res.content.decode("utf-8").lower() or "paths" in schema_res.content.decode("utf-8").lower()
+
+    # Test Swagger UI documentation HTML endpoint
+    docs_res = client.get("/api/docs/")
+    assert docs_res.status_code == 200
+    assert "swagger" in docs_res.content.decode("utf-8").lower()
+
+    # Test Redoc documentation HTML endpoint
+    redoc_res = client.get("/api/redoc/")
+    assert redoc_res.status_code == 200
+    assert "redoc" in redoc_res.content.decode("utf-8").lower()
+
+
+
 def test_dataset_upload_profile_and_score(client):
     """Verify POST /api/datasets/ handles upload, profiles, and generates Version 1."""
     csv_content = b"id,name,age\n1,Alice,25\n2,Bob,30\n3,Charlie,\n"

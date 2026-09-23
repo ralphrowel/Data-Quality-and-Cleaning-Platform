@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Third-party
     "rest_framework",
     "corsheaders",
+    "drf_spectacular",
     # Local Apps
     "api",
 ]
@@ -112,6 +113,19 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser",
         "rest_framework.parsers.FormParser",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# Swagger / OpenAPI 3.0 Documentation Settings
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Data Quality & Cleaning Platform API",
+    "DESCRIPTION": (
+        "Interactive OpenAPI 3.0 documentation for automated data profiling, "
+        "multi-dimensional quality diagnostics, deterministic cleaning, and dataset version lineage."
+    ),
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
 }
 
 # Strict 25 MB file upload limit
