@@ -1,0 +1,189 @@
+/* =============================================================================
+   Data Quality & Cleaning Platform — Design System & Theme
+   Phase 8: Sleek Dark Glassmorphism, Micro-Interactions, Premium Typography
+   ============================================================================= */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Surfaces & Backgrounds */
+  --bg-dark: #070b14;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #171d33 0%, #070b14 70%);
+  --surface-card: rgba(15, 23, 42, 0.65);
+  --surface-card-hover: rgba(30, 41, 59, 0.75);
+  --surface-elevated: rgba(30, 41, 59, 0.85);
+  --surface-glass: rgba(255, 255, 255, 0.03);
+
+  /* Borders & Glows */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(56, 189, 248, 0.3);
+  --border-focus: #38bdf8;
+  --glow-cyan: 0 0 25px rgba(56, 189, 248, 0.15);
+  --glow-emerald: 0 0 25px rgba(16, 185, 129, 0.2);
+
+  /* Typography Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #070b14;
+
+  /* Accent & Category Colors */
+  --cyan-400: #38bdf8;
+  --cyan-500: #0ea5e9;
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --purple-400: #c084fc;
+
+  /* Status & Letter Grades */
+  --grade-a: #10b981;
+  --grade-a-bg: rgba(16, 185, 129, 0.12);
+  --grade-b: #38bdf8;
+  --grade-b-bg: rgba(56, 189, 248, 0.12);
+  --grade-c: #f59e0b;
+  --grade-c-bg: rgba(245, 158, 11, 0.12);
+  --grade-d: #f97316;
+  --grade-d-bg: rgba(249, 115, 22, 0.12);
+  --grade-f: #ef4444;
+  --grade-f-bg: rgba(239, 68, 68, 0.12);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: var(--surface-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+  transition: border-color var(--transition-smooth), transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.badge-a { background: var(--grade-a-bg); color: var(--grade-a); border: 1px solid rgba(16, 185, 129, 0.3); }
+.badge-b { background: var(--grade-b-bg); color: var(--grade-b); border: 1px solid rgba(56, 189, 248, 0.3); }
+.badge-c { background: var(--grade-c-bg); color: var(--grade-c); border: 1px solid rgba(245, 158, 11, 0.3); }
+.badge-d { background: var(--grade-d-bg); color: var(--grade-d); border: 1px solid rgba(249, 115, 22, 0.3); }
+.badge-f { background: var(--grade-f-bg); color: var(--grade-f); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+.badge-critical { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+.badge-warning { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.badge-info { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+
+/* Monospace & Code */
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 300ms ease-out forwards;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
