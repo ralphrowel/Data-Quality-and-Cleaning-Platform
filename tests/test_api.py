@@ -162,3 +162,44 @@ def test_non_existent_dataset_not_found(client):
     """Verify requesting non-existent dataset returns 404."""
     response = client.get("/api/datasets/fake-uuid-not-found/")
     assert response.status_code == 404
+
+
+def test_upload_missing_file_key(client):
+    """Verify POST /api/datasets/ without file key returns 400 Bad Request."""
+    response = client.post("/api/datasets/", {"name": "No File"}, format="multipart")
+    assert response.status_code == 400
+    assert "error" in response.json()
+
+
+def test_upload_empty_zero_byte_file(client):
+    """Verify POST /api/datasets/ with empty zero-byte file returns 400 Bad Request."""
+    empty_file = io.BytesIO(b"")
+    empty_file.name = "empty.csv"
+    response = client.post("/api/datasets/", {"file": empty_file}, format="multipart")
+    assert response.status_code == 400
+    assert "error" in response.json()
+
+
+def test_cleaning_non_existent_dataset(client):
+    """Verify POST /api/datasets/<id>/clean/ on invalid ID returns 404."""
+    response = client.post("/api/datasets/non-existent-uuid/clean/", {}, format="json")
+    assert response.status_code == 404
+
+
+def test_profile_non_existent_dataset(client):
+    """Verify GET /api/datasets/<id>/profile/ on invalid ID returns 404."""
+    response = client.get("/api/datasets/non-existent-uuid/profile/")
+    assert response.status_code == 404
+
+
+def test_quality_non_existent_dataset(client):
+    """Verify GET /api/datasets/<id>/quality/ on invalid ID returns 404."""
+    response = client.get("/api/datasets/non-existent-uuid/quality/")
+    assert response.status_code == 404
+
+
+def test_export_non_existent_dataset(client):
+    """Verify GET /api/datasets/<id>/export/ on invalid ID returns 404."""
+    response = client.get("/api/datasets/non-existent-uuid/export/")
+    assert response.status_code == 404
+
