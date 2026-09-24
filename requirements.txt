@@ -13,3 +13,8 @@ drf-spectacular>=0.30.0
 # Testing
 pytest>=8.0.0
 pytest-django>=4.8.0
+
+# Production & Deployment (Phase 12)
+gunicorn>=21.2.0
+psycopg2-binary>=2.9.9
+
