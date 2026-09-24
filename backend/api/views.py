@@ -33,6 +33,50 @@ scorer = DataQualityScorer()
 cleaner = DataCleaningEngine()
 
 
+def _validate_file_content(uploaded_file, ext: str) -> Optional[str]:
+    """Inspects leading magic bytes to ensure file contents genuinely match extension."""
+    header = uploaded_file.read(1024)
+    uploaded_file.seek(0)
+
+    if not header:
+        return "Uploaded file is empty (0 bytes)."
+
+    if ext == ".xlsx":
+        # Standard ZIP container signature PK\x03\x04
+        if not header.startswith(b"PK\x03\x04"):
+            return "Invalid Excel XLSX file: missing ZIP container header signature."
+    elif ext in (".xls",):
+        # Legacy Compound File Binary / OLE2 signature
+        if not header.startswith(b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"):
+            return "Invalid legacy Excel XLS file: missing OLE2 container header signature."
+    elif ext == ".csv":
+        # Disallow binary executables masquerading as CSV
+        if header.startswith(b"MZ"):
+            return "Executable binaries (.exe/.dll) cannot be uploaded as CSV."
+        if header.startswith(b"\x7fELF"):
+            return "Linux ELF binaries cannot be uploaded as CSV."
+        if header[:4] in (b"\xfe\xed\xfa\xce", b"\xfe\xed\xfa\xcf", b"\xce\xfa\xed\xfe", b"\xcf\xfa\xed\xfe"):
+            return "Mach-O binaries cannot be uploaded as CSV."
+
+    return None
+
+
+def _sanitize_filename(filename: str) -> str:
+    """Strips directory traversal sequences and non-printable characters."""
+    clean_name = Path(filename).name.strip()
+    clean_name = re.sub(r"[\r\n\t\x00]", "", clean_name)
+    return clean_name or "dataset.csv"
+
+
+def _verify_dataset_ownership(dataset: Dict[str, Any], request) -> bool:
+    """Verifies that requesting user owns the dataset to prevent IDOR vulnerabilities."""
+    owner_id = dataset.get("user_id")
+    request_user_id = request.headers.get("X-User-ID")
+    if owner_id and request_user_id:
+        return str(owner_id) == str(request_user_id)
+    return True
+
+
 @api_view(["GET"])
 def health_check(request):
     """Simple API liveness healthcheck."""
@@ -91,14 +135,19 @@ def datasets_collection(request):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    # Validate file extension
-    filename = uploaded_file.name
+    # Sanitize filename and validate file extension
+    filename = _sanitize_filename(uploaded_file.name)
     ext = Path(filename).suffix.lower()
     if ext not in (".csv", ".xlsx", ".xls"):
         return Response(
             {"error": f"Unsupported file type '{ext}'. Allowed: .csv, .xlsx, .xls"},
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+    # Magic byte and content validation
+    content_err = _validate_file_content(uploaded_file, ext)
+    if content_err:
+        return Response({"error": content_err}, status=status.HTTP_400_BAD_REQUEST)
 
     dataset_name = request.data.get("name", Path(filename).stem.replace("_", " ").title())
     description = request.data.get("description", "")
@@ -143,12 +192,16 @@ def datasets_collection(request):
     )
 
 
+
 @api_view(["GET"])
 def dataset_detail(request, dataset_id):
     """Returns dataset metadata and its version history."""
     dataset = repo.get_dataset(dataset_id)
     if not dataset:
         return Response({"error": f"Dataset '{dataset_id}' not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if not _verify_dataset_ownership(dataset, request):
+        return Response({"error": "Access denied. You do not own this dataset."}, status=status.HTTP_403_FORBIDDEN)
 
     versions = repo.get_dataset_versions(dataset_id)
     return Response(
@@ -166,6 +219,9 @@ def dataset_profile(request, dataset_id):
     dataset = repo.get_dataset(dataset_id)
     if not dataset:
         return Response({"error": f"Dataset '{dataset_id}' not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if not _verify_dataset_ownership(dataset, request):
+        return Response({"error": "Access denied. You do not own this dataset."}, status=status.HTTP_403_FORBIDDEN)
 
     version_id = request.query_params.get("version_id")
     if not version_id:
@@ -188,6 +244,9 @@ def dataset_quality(request, dataset_id):
     dataset = repo.get_dataset(dataset_id)
     if not dataset:
         return Response({"error": f"Dataset '{dataset_id}' not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if not _verify_dataset_ownership(dataset, request):
+        return Response({"error": "Access denied. You do not own this dataset."}, status=status.HTTP_403_FORBIDDEN)
 
     version_id = request.query_params.get("version_id")
     if not version_id:
@@ -217,6 +276,9 @@ def dataset_clean(request, dataset_id):
     dataset = repo.get_dataset(dataset_id)
     if not dataset:
         return Response({"error": f"Dataset '{dataset_id}' not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if not _verify_dataset_ownership(dataset, request):
+        return Response({"error": "Access denied. You do not own this dataset."}, status=status.HTTP_403_FORBIDDEN)
 
     versions = repo.get_dataset_versions(dataset_id)
     if not versions:
@@ -293,6 +355,10 @@ def dataset_export(request, dataset_id):
     if not dataset:
         return Response({"error": f"Dataset '{dataset_id}' not found."}, status=status.HTTP_404_NOT_FOUND)
 
+    if not _verify_dataset_ownership(dataset, request):
+        return Response({"error": "Access denied. You do not own this dataset."}, status=status.HTTP_403_FORBIDDEN)
+
+
     version_id = request.query_params.get("version_id")
     if not version_id:
         versions = repo.get_dataset_versions(dataset_id)
@@ -305,12 +371,13 @@ def dataset_export(request, dataset_id):
 
         # Apply formula injection defense
         formula_triggers = re.compile(r"^[\=\+\-\@\t\r]")
-        str_cols = df.select_dtypes(include=["object", "str"]).columns
+        str_cols = df.select_dtypes(include=["object", "string"]).columns
         export_df = df.copy()
         for col in str_cols:
             export_df[col] = export_df[col].apply(
                 lambda val: f"'{val}" if isinstance(val, str) and formula_triggers.match(val) else val
             )
+
 
         # Generate CSV buffer
         buffer = io.StringIO()
