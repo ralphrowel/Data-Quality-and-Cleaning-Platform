@@ -87,13 +87,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Database: SQLite for local dev/testing; PostgreSQL for production
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": PROJECT_ROOT / "data" / "platform.db",
+# Database: PostgreSQL for production (Docker / Cloud), SQLite for local dev
+if os.environ.get("POSTGRES_DB"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("POSTGRES_DB", "data_quality_platform"),
+            "USER": os.environ.get("POSTGRES_USER", "postgres"),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
+            "HOST": os.environ.get("POSTGRES_HOST", "db"),
+            "PORT": os.environ.get("POSTGRES_PORT", "5432"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": PROJECT_ROOT / "data" / "platform.db",
+        }
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -111,8 +123,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
+STATIC_ROOT = PROJECT_ROOT / "staticfiles"
+
+# Persistent Storage for Dataset Snapshots (Parquet)
+STORAGE_DIR = Path(os.environ.get("STORAGE_DIR", PROJECT_ROOT / "data" / "storage"))
+STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 
 # CORS configuration for React frontend
 cors_env = os.environ.get("CORS_ALLOWED_ORIGINS")
