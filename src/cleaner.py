@@ -79,11 +79,12 @@ class CleaningResult:
         export_df = self.cleaned_df.copy()
         formula_triggers = re.compile(r"^[\=\+\-\@\t\r]")
 
-        str_cols = export_df.select_dtypes(include=["object", "str"]).columns
+        str_cols = export_df.select_dtypes(include=["object", "string"]).columns
         for col in str_cols:
             export_df[col] = export_df[col].apply(
                 lambda val: f"'{val}" if isinstance(val, str) and formula_triggers.match(val) else val
             )
+
 
         export_df.to_csv(path, index=False, encoding="utf-8")
 
